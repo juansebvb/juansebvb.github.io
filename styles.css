@@ -1,0 +1,257 @@
+/* styles.css */
+body {
+    font-family: "Inria Sans", serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a{
+    text-decoration: none;
+    color: currentColor;
+  }
+  
+  header {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw 2vw;
+    z-index: 3;
+  }
+  
+  .Multi{
+    font-family: "Nothing You Could Do", cursive;
+  }
+
+  header .logo {
+    font-size: 2.5vw;
+  }
+
+  p, h3{
+    font-size: 1.5vw;
+  }
+
+  h1, h2{
+    font-size: 2vw;
+  }
+
+  .nav-menu{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    justify-content: space-around;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5vw;
+
+  }
+
+
+  #menu-toggle, #menu2-toggle{
+    color: #fff;
+    text-decoration: none;
+    margin-right: 2.5vw;
+    font-size: 1.5vw;
+    cursor: pointer;
+  }
+
+  .menu, .menu2 {
+    width: 100%;
+    height: 20%;
+    background-color: black;
+    position: fixed;
+    left: 0;
+    top: -100%;
+    transition: top 0.3s ease-in-out;
+    padding: 0;
+    padding-bottom: 1vw;
+    z-index: 1;
+  }
+  
+  .menu ul {
+    list-style-type: none;
+    padding-left: 65vw;
+
+  }
+  .menu2 ul {
+    list-style-type: none;
+    padding-left: 85vw;
+
+  }
+  
+  .menu ul li, .menu2 ul li {
+    padding: 1vw 0vw;
+    text-align: left;
+  }
+  
+  .menu ul li a, .menu2 ul li a {
+    text-decoration: none;
+    font-size: 1.5vw;
+    color: white;
+    display: block;
+  }
+
+  .menu.open, .menu2.open{
+    top: 4vw;
+  }
+  
+  main {
+    padding: 2vw;
+  }
+  
+  .intro, .how-it-works {
+    text-align: center;
+    padding: 0 4vw;
+  }
+  
+  .intro span {
+    font-weight: bold;
+  }
+  
+  .services, .plans {
+    margin: 5vw 0vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+   .services .cards, .plans .cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1vw;
+
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-image: linear-gradient(white, #E5E5E5);
+    padding: 2vw;
+    text-align: center;
+    box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    width: 20vw;
+    margin: 2vw;
+  }
+  
+  .card img {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  button {
+    background: #ffd400;
+    border: none;
+    padding: 1vw 2vw;
+    color: #000;
+    border-radius: 1vw;
+    cursor: pointer;
+    margin-top: 1vw;
+    font-size: 1.5vw;
+  }
+
+  .plans {
+    position: relative;
+    padding: 6vw 2vw 8vw 2vw;
+    color: #000;
+    margin-bottom: -8vw;
+  }
+  
+  .plans::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(-170deg, transparent 50%, #e0e0e0 50%);
+    z-index: -1;
+  }
+  
+  
+  footer {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 1vw;
+    
+  }
+  
+  .CV{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .botonesCV{
+    display: flex;
+    flex-direction: row;
+    width: 60vw;
+    justify-content: space-around;
+  }
+  
+  #chat {
+    width: 60vw;
+    margin: 2vw auto;
+    padding: 1vw;
+    border-radius: 1vw;
+    background: #ffffff;
+    height: 40vw;
+    overflow-y: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+#resumeOutput {
+    width: 60vw;
+    margin: 2vw auto;
+    padding: 2vw;
+    border-radius: 1vw;
+    background: #ffffff;
+    overflow-y: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.message {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+.user {
+    background-color: #0084ff;
+    color: #ffffff;
+    align-self: flex-end;
+}
+.assistant {
+    background-color: #f1f0f0;
+    color: #000000;
+    align-self: flex-start;
+}
+textarea {
+    width: 60vw;
+    margin: 1vw auto;
+    display: block;
+    padding: 1vw;
+    height: 6vw;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 1.5vw;
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.subsection-title {
+    font-weight: bold;
+}

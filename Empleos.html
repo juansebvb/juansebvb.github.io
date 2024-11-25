@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  <style>
+    main{
+        display: flex;
+        flex-direction: row;
+        font-size: 1.5vw;
+    }
+    .filtros{
+        margin: 0 4vw;
+    }
+    #filterForm{
+        width: 20vw;
+        height: fit-content;
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 1vw;
+
+    }
+    .custom-select select {
+        width: 100%;
+        font-size: 1.2vw;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        padding: 0.5vw;
+    }
+    
+    #jobResults div{
+        width: 60vw;
+        margin-bottom: 2vw;
+        padding: 2vw;
+        background-image: linear-gradient(white, #E5E5E5);
+        box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        
+    }
+
+    #jobResults span{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #jobResults p{
+       margin: 0.5vw;
+    }
+
+  </style>
+  <title>Empleos</title>
+</head>
+<body>
+    <header>
+        <a href="index.html"><div class="logo"><span class="Multi">Multi</span>Career</div></a>
+        <div class="nav-menu">
+          <span id="menu-toggle"> Buscar </span>
+          <span id="menu2-toggle"> Crear </span>
+        </div>
+          
+        <div id="menu" class="menu">
+          <ul>
+              <li><a href="Empleos.html">Empleos</a></li>
+              <li><a href="Cursos.html">Cursos y Certificaciones</a></li>
+          </ul>
+        </div>
+    
+        <div id="menu2" class="menu2">
+          <ul>
+              <li><a href="HojaDeVida.html">Hoja de vida</a></li>
+              <li><a href="Portafolio.html">Portafolio</a></li>
+          </ul>
+        </div>
+      </header>
+    
+  <main>
+    <div class="filtros">
+    <h1>Filtrar Empleos</h1>
+    <form id="filterForm">
+        <label for="location">Ubicación:</label>
+        <div class="custom-select">
+        <select id="location" name="location">
+        <option value="">Todas</option>
+        <option value="Bogotá, DC">Bogotá, DC</option>
+        <option value="Medellín, Antioquia">Medellín, Antioquia</option>
+        <option value="Cali, Valle del Cauca">Cali, Valle del Cauca</option>
+        <option value="Ibagué, Tolima">Ibagué, Tolima</option>
+        </select>
+        </div>
+
+        <label for="type">Tipo de Contrato:</label>
+        <div class="custom-select">
+        <select id="type" name="type">
+        <option value="">Todos</option>
+        <option value="Contrato a término fijo">Término Fijo</option>
+        <option value="Contrato a término indefinido">Término Indefinido</option>
+        <option value="Contrato de Obra">Contrato de Obra</option>
+        <option value="Contrato de Aprendizaje">Contrato de Aprendizaje</option>
+        <option value="Prestación de Servicios">Prestación de Servicios</option>
+        </select>
+        </div>
+
+        <label for="modalidad">Modalidad:</label>
+        <div class="custom-select">
+        <select id="modalidad" name="modalidad">
+        <option value="">Todas</option>
+        <option value="Presencial">Presencial</option>
+        <option value="Remoto">Remoto</option>
+        <option value="Presencial y remoto">Híbrido</option>
+        </select>
+        </div>
+
+        <label for="categoria">Categoria:</label>
+        <div class="custom-select">
+        <select id="categoria" name="categoria">
+        <option value="">Todas</option>
+        <option value="web">Diseño web</option>
+        <option value="grafico">Diseño Gráfico</option>
+        <option value="contenido">Producción contenidos multimedia</option>
+        <option value="desarrollo">Desarrollo</option>
+        <option value="animacion">Animacion</option>
+        </select>
+        </div>
+    </form>
+    </div>
+    <div id="jobResults"></div>
+  </main>
+  <footer>
+    <p>Contáctanos</p>
+    <p>3005821103 | info@multicareer.com</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const jobs = [
+    {
+      "title": "Diseñador Web",
+      "company": "CAFAM",
+      "location": "Bogotá, DC",
+      "type": "Contrato a término fijo",
+      "description": "Si te apasiona el mundo del diseño ,Te invitamos a ser parte de la familia CAFAM, estamos en búsqueda de un desarrollador Web, Profesional en Diseño Gráfico, Diseño de Interacción, Psicología Cognitiva o un campo relacionado, con habilidades en UX y UI. Serás responsable de diseñar interfaces atractivas y funcionales que ofrezcan una experiencia de usuario excepcional..",
+      "modalidad": "Presencial",
+      "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenador-web-en-bogota-dc-9C4EED80451361B961373E686DCF3405#lc=ListOffers-Score4-1"
+    , "categoria": "web"
+    },
+    {
+      "title": "Diseñador grafico con experiencia y conocimientos en Marketing y maquetacion de paginas WEB.",
+      "company": "XYZ CREATIA SAS",
+      "location": "Ibagué, Tolima",
+      "type": "",
+      "description": "Profesional o Tecnólogo con sólida experiencia en marketing digital y diseño grafico habilidades en maquetación de páginas web, para conceptualizar, estructurar y diseñar sitios web atractivos y optimizados que faciliten el trabajo del programador. Especializado en la creación de contenidos visuales que alineen la estética con la funcionalidad, garantizando una excelente experiencia de usuario y una alta conversión de visitantes.",
+      "modalidad": "Presencial",
+      "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenador-grafico-con-experiencia-y-conocimientos-en-marketing-y-maquetacion-de-paginas-web-en-ibague-515AB74C58BADE0461373E686DCF3405#lc=ListOffers-Score4-0"
+        , "categoria": "grafico"
+    },
+    {
+      "title": "Diseñador web",
+      "company": "Alkosto",
+      "location": "Bogotá, DC",
+      "type": "Contrato a término indefinido",
+      "description": "Crear y desarrollar piezas gráficas y contenidos visuales enriquecidos para las páginas web de Alkosto y Ktronix, con el fin de mejorar la experiencia de usuario y potenciar la conversión de ventas.",
+      "modalidad": "Presencial y remoto",
+      "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenador-web-bogota-en-bogota-dc-81D1A9205CD2C7CB61373E686DCF3405"
+    , "categoria": "web"
+    },
+    {
+        "title": "Desarrollador Back end",
+        "company": "LilyPink & YOI",
+        "location": "Bogotá, DC",
+        "type": "Contrato de Obra",
+        "description": "LILI PINK y YOI Empresa líder en el mercado colombiano caracterizada por manejar marcas creativas, frescas, innovadoras y productos en tendencia y pronta moda, está en búsqueda de DESARROLLADOR BACK - END por proyecto de 2 MESES, profesional sistemas o áreas afines",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-back-end-norte-de-bogota-en-bogota-dc-44CED36EAFE6C35E61373E686DCF3405"
+   , "categoria": "desarrollo"
+    },
+    {
+        "title": "Desarrollador Fullstack bilingue",
+        "company": "Solvo SAS",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término indefinido",
+        "description": "¡Únete a nuestro equipo y trabaja en proyectos innovadores desde la comodidad de tu hogar! Programador-a Desarrollador-a .NET Lunes a Viernes.",
+        "modalidad": "Remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-fullstack-bilingue-remoto-en-bogota-dc-B042100267FDB1F661373E686DCF3405"
+   , "categoria": "desarrollo"
+    },
+    {
+        "title": "Desarrollador Front End",
+        "company": "Grupo Alianza",
+        "location": "Bogotá, DC",
+        "type": "Contrato de Obra",
+        "description": "Importante empresa innovadora plataforma digital de evaluación de Talento Humano, esta en búsqueda de un(a) talentoso(a) Desarrollador Front End para unirse a nuestro equipo. Si te motiva trabajar en un entorno dinámico, en constante evolución y con un propósito significativo, ¡te invitamos a formar parte de nuestro equipo!",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-front-end-en-bogota-dc-1A4E057C28D0AC8061373E686DCF3405"
+    , "categoria": "desarrollo"
+    },
+    {
+        "title": "Animador 3D",
+        "company": "Polinter SAS",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término fijo",
+        "description": "Importante empresa del sector manufacturero, se encuentra en búsqueda de animador 3D, con 6 meses de experiencia en el área, requerimos persona responsable con disposición y actitud positiva y de servicio.",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-animador-3d-con-experiencia-en-bogota-dc-26BE80558AD6FA0161373E686DCF3405"
+        , "categoria": "animacion"
+    },
+    {
+        "title": "Diseñador/a gráfico y animador",
+        "company": "Campo Empresarial SAS",
+        "location": "Medellín, Antioquia",
+        "type": "Prestación de Servicios",
+        "description": "Somos All In One Inventions y buscamos un diseñador(a) gráfico / animador. Somos profesionales, solidarios, colaboradores y nuestro objetivo es ayudar a los inventores a impulsar sus productos y aplicaciones en el mercado.",
+        "modalidad": "Remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenadora-grafico-y-animador-remoto-en-medellin-FBEEBD95D90E017361373E686DCF3405"
+    , "categoria": "grafico", "categoria": "animacion"
+    },
+    {
+        "title": "Desarrollador full stack (Java, react o Angular)",
+        "company": "Adecco Colombia SA",
+        "location": "Cali, Valle del Cauca",
+        "type": "Contrato a término indefinido",
+        "description": "Desarrollo de los requerimientos integrando el diseño de la experiencia del cliente (front end), Implementación de microservicios (Sspring,Java), Registro de Actividades en Jira y Bitbucket, Implementación Front_End-( React, JS,Angular; NextJs 11, Creación de consultas y entendimiento BD( Oracle, Postgres preferiblemente). Dar soporte a proyectos",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-full-stack-java-react-o-angular-en-cali-6D9C12C852BC977D61373E686DCF3405"
+    , "categoria": "desarrollo"
+    },
+    {
+        "title": "Desarrollador web",
+        "company": "Ocupar Temporales SA",
+        "location": "Cali, Valle del Cauca",
+        "type": "Contrato de Obra",
+        "description": "Importante empresa del sector tecnológico ubicada al norte de Cali, se encuentra en la búsqueda de Técnico, tecnólogo o profesional en áreas de sistemas, desarrollo de software o afines que cuente con 2 años de experiencia en en soporte técnico a servicios web y administración tecnológica.",
+        "modalidad": "Presencial y remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-web-cali-en-cali-E37EBA688811124F61373E686DCF3405"
+        , "categoria": "web"
+    },
+    {
+        "title": "Desarrollador (a) Chatbot",
+        "company": "KONECTA",
+        "location": "Medellín, Antioquia",
+        "type": "Contrato a término indefinido",
+        "description": "Haz parte de nuestro equipo y vive experiencias ¡únicas y memorables! Somos fans 1 de conectar. Tenemos el poder de la conexión, y cada día desafiamos los límites para seguir evolucionando. Estamos en busca de personas talentosas que también sientan el feeling por romper los esquemas y transformar vidas",
+        "modalidad": "Presencial y remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-a-chatbot-en-medellin-29D42973336D641E61373E686DCF3405"
+    , "categoria": "desarrollo"
+    },
+    {
+        "title": "Creador de contenido visual y multimedia",
+        "company": "Agencia de empleo de Colsubsidio",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término indefinido",
+        "description": "Experiencia previa como editor de videos o en roles similares. Conocimiento avanzado de programas de edición de videos como Adobe Premiere Pro, Final Cut Pro, entre otros. Capacidad para trabajar de forma autónoma y gestionar proyectos de principio a fin.",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-creador-de-contenido-visual-y-multimedia-en-bogota-dc-14D1C2C920E68CF261373E686DCF3405"
+        , "categoria": "contenido"
+    },
+    {
+        "title": "Creador de contenido multimedia",
+        "company": "Smart Fit",
+        "location": "Medellín, Antioquia",
+        "type": "Contrato a término indefinido",
+        "description": "Únete a Smart Fit como Diseñador de Contenidos Multimedia! ¿Eres creativo, apasionado por el mundo fitness y un experto en crear contenido que impacte en redes sociales? ¡Esta es tu oportunidad! En Smart Fit, estamos buscando un Diseñador de Contenidos Multimedia que combine creatividad y dinamismo para contar historias visuales únicas que inspiren a nuestros seguidores y transmitan la energía de nuestra marca.",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-creador-de-contenido-multimedia-en-medellin-3E43ED59C5B7162861373E686DCF3405"
+     , "categoria": "contenido"
+    },
+    {
+        "title": "Creador de Contenido Gráfico e Interactivo para Formación",
+        "company": "Grupo Formas Íntimas",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término indefinido",
+        "description": "¿Eres un experto en la Suite de Adobe y Articulate? ¡Entonces eres el candidato que estamos buscando!",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-creador-de-contenido-grafico-e-interactivo-para-formacion-medellin-en-medellin-EC33B16D2165999F61373E686DCF3405"
+        , "categoria": "contenido", "categoria": "grafico"
+    },
+    {
+        "title": "Diseñador Multimedia",
+        "company": "Interbel SAS",
+        "location": "Medellín, Antioquia",
+        "type": "Contrato a término fijo",
+        "description": "Objetivo Principal: Comunicar la propuesta de valor de la marca Empresa, a través de piezas multimediales (Para redes sociales, e-card, videos, catálogos, material POP, etiquetas, etc), aportando a que el proceso de Mercadeo pueda construir, gestionar y mantener una imagen sólida de marca online y offline para la empresa, con el fin de aumentar la visibilidad, posicionamiento y fortalecimiento de la marca salvaguardando el manual de la misma.",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenador-multimedia-experiencia-demostrable-en-medellin-2BDBBFCF7A07922961373E686DCF3405"
+        , "categoria": "contenido"
+    },
+    {
+        "title": "Practicante universitario en Ingeniería Multimedia, Diseño Gráfico y afines Bogotá",
+        "company": "Grupo Amarey Nova Medical",
+        "location": "Bogotá, DC",
+        "type": "Contrato de Aprendizaje",
+        "description": "Prestigiosa empresa del sector de la salud se encuentra en búsqueda de PRACTICANTE DE INGENIERIA MULTIMEDIA, DISEÑO GRAFICO Y/O CARRERAS AFINES, quien será el encargado de diseñar las piezas graficas para el área de comunicaciones corporativas de la compañía, debe estar estudiando carrera profesional, importante que tenga claros conocimientos en (suite adobe, lllustrator, photoshop, premiere, audition, After Effects) y un buen conocimiento en edición de video, debe ser una persona con habilidades de relacionamiento, creatividad y agilidad apasionada por la creación de piezas educativas.",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-practicante-universitario-en-ingenieria-multimedia-diseno-grafico-y-afines-bogota-en-bogota-dc-CCF472FF7C09A99761373E686DCF3405"
+        , "categoria": "contenido", "categoria":"grafico"
+    },
+    {
+        "title": "Estudiante de comunicación, multimedia o a fines para practicas",
+        "company": "Outsourcing SAS",
+        "location": "Bogotá, DC",
+        "type": "Contrato de Aprendizaje",
+        "description": "OUTSOURCING S A S está buscando estudiantes proactivos y creativos para unirse a nuestro equipo como practicante en el área de Comunicaciones",
+        "modalidad": "Presencial y remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-estudiante-de-comunicacion-multimedia-o-a-fines-para-practicas-no-se-aceptan-personas-ya-tituladas-en-bogota-dc-3FD46F2258C4CF0E61373E686DCF3405"
+        , "categoria": "contenido"
+    },
+    {
+        "title": "Desarrollador Front End . Especialista en Operaciones de Marketing",
+        "company": "Global DigiOps SAS",
+        "location": "Ibagué, Tolima",
+        "type": "Contrato a término fijo",
+        "description": "El candidato ideal tiene experiencia comprobada en HTML5, CSS3, JavaScript y WordPress, así como un sólido conocimiento de la optimización front-end y mejores prácticas de SEO. Si esto te describe, nos encantaría conocerte.",
+        "modalidad": "Remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-front-end-especialista-en-operaciones-de-marketing-remoto-todo-colombia-en-ibague-8192557C534AFB3461373E686DCF3405"
+    , "categoria": "desarrollo"
+    },
+    {
+        "title": "Practicante de comunicación audiovisual,producción multimedia diseño gráfico/entretenimiento digital",
+        "company": "Emtelco CX & BPO",
+        "location": "Medellín, Antioquia",
+        "type": "Contrato de Aprendizaje",
+        "description": "Tu futuro profesional es nuestra prioridad. En Emtelco, te invitamos a formar parte de nuestro equipo y realizar tus prácticas universitarias con nosotros. Aquí, tendrás la oportunidad de ser tú mismo y hacer realidad tus ideas, porque estamos firmemente convencidos de que la diversidad, la creatividad y la capacidad de concretar nuestros sueños hacen de emtelco un lugar para enamorar personas. ",
+        "modalidad": "Presencial y remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-practicante-de-comunicacion-audiovisualproduccion-multimedia-diseno-graficoentretenimiento-digital-habilitado-para-firmar-contrato-de-aprendizaje-en-medellin-6E001ABE534B236761373E686DCF3405"
+        , "categoria": "contenido", "categoria":"grafico"
+    },
+    {
+        "title": "Aprendiz de Producción Multimedia o áreas afines",
+        "company": "Conentrix",
+        "location": "Medellín, Antioquia",
+        "type": "Contrato de Aprendizaje",
+        "description": "Concentrix está buscando a personas como tú para que hagan parte de esta familia de Gamechangers. Estamos en búsqueda de estudiantes tecnicos o tecnologos Producción Multimedia o áreas afines disponibles para comenzar su etapa productiva y realizar sus prácticas en nuestra compañia.",
+        "modalidad": "Remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-aprendiz-de-produccion-multimedia-o-areas-afines-en-medellin-05ED3D224ABC64B861373E686DCF3405"
+       , "categoria": "contenido"
+    }
+   
+
+  ]
+  ;
+
+    const filterForm = document.getElementById('filterForm');
+    const jobResults = document.getElementById('jobResults');
+
+    const filterJobs = () => {
+      const location = document.getElementById('location').value;
+      const type = document.getElementById('type').value;
+      const modalidad = document.getElementById('modalidad').value;
+      const categoria = document.getElementById('categoria').value;
+
+      const filteredJobs = jobs.filter(job =>
+        (location === "" || job.location === location) &&
+        (type === "" || job.type === type) &&
+        (modalidad === "" || job.modalidad === modalidad)  &&
+        (categoria === "" || job.categoria === categoria)
+      );
+
+      displayJobs(filteredJobs);
+    };
+
+    const displayJobs = (jobs) => {
+      jobResults.innerHTML = jobs.map(job => `
+        <div>
+          <h2>${job.title}</h2>
+          <p><strong>Empresa:</strong> ${job.company}</p>
+          <span>
+            <p><strong>Ubicación:</strong> ${job.location}</p>
+            <p><strong>Tipo:</strong> ${job.type || "N/A"}</p>
+            <p><strong>Modalidad:</strong> ${job.modalidad}</p>
+         </span>
+          <p>${job.description}</p>
+          <a href="${job.link}" target="_blank"><button>Ver más</button></a>
+        </div>
+      `).join('');
+    };
+
+    filterForm.addEventListener('change', filterJobs);
+
+    // Mostrar todos los trabajos al cargar la página
+    displayJobs(jobs);
+  </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MultiCareer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  <style>
+    body {
+        text-align: center;  
+    }
+    .upload-box {
+        border: 2px dashed #ccc;
+        border-radius: 1vw;
+        padding: 2vw;
+        margin: 2vw auto;
+        width: 50vw;
+        height: 25vw;
+        background-color: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+    }
+    .upload-box.dragover {
+        border-color: #00b894;
+        background-color: #e8f5e9;
+    }
+    .upload-box.uploaded {
+        border-color: #4caf50;
+        background-color: #e8f5e9;
+    }
+    input[type="file"] {
+        display: none;
+    }
+    .file-name {
+        font-size: 14px;
+        color: #4caf50;
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+    }
+    main span {
+        margin-top: 5vw;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    main span button {
+        height: 3vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 3vw;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><div class="logo"><span class="Multi">Multi</span>Career</div></a>
+    <div class="nav-menu">
+      <span id="menu-toggle"> Buscar </span>
+      <span id="menu2-toggle"> Crear </span>
+    </div>
+      
+    <div id="menu" class="menu">
+      <ul>
+          <li><a href="Empleos.html">Empleos</a></li>
+          <li><a href="Cursos.html">Cursos y Certificaciones</a></li>
+      </ul>
+    </div>
+
+    <div id="menu2" class="menu2">
+      <ul>
+          <li><a href="HojaDeVida.html">Hoja de vida</a></li>
+          <li><a href="Portafolio.html">Portafolio</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <h2>Sube tu hoja de vida y analizaremos las vacantes actuales para ver cuáles se acoplan a tu perfil</h2>
+    <form id="uploadForm" action="Empleos_CV.html" method="post" enctype="multipart/form-data">
+        <div id="uploadBox" class="upload-box">
+            Arrastra y suelta un archivo .pdf aquí o haz clic para seleccionar
+            <input type="file" id="pdfFile" name="pdfFile" accept=".pdf">
+            <div id="fileName" class="file-name" style="display: none;"></div>
+        </div>
+        <button type="submit">Analizar</button>
+    </form>
+    <span>
+      <h2>O revisa todas las vacantes disponibles</h2> 
+      <a href="Empleos.html"><button type="button">→</button></a>
+    </span>
+  </main>
+
+  <footer>
+    <p>Contáctanos</p>
+    <p>3005821103 | info@multicareer.com</p>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    const uploadBox = document.getElementById('uploadBox');
+    const fileInput = document.getElementById('pdfFile');
+    const fileNameDisplay = document.getElementById('fileName');
+    const uploadForm = document.getElementById('uploadForm');
+
+    // Abrir el diálogo de selección al hacer clic
+    uploadBox.addEventListener('click', () => fileInput.click());
+
+    // Estilo para arrastrar archivo
+    uploadBox.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadBox.classList.add('dragover');
+    });
+
+    uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('dragover'));
+
+    // Manejo de archivos soltados
+    uploadBox.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadBox.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            displayFileName(files[0]);
+        }
+    });
+
+    // Mostrar el nombre del archivo seleccionado
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) displayFileName(file);
+    });
+
+    function displayFileName(file) {
+        uploadBox.classList.add('uploaded');
+        fileNameDisplay.textContent = `Archivo: ${file.name}`;
+        fileNameDisplay.style.display = 'block';
+    }
+
+    // Validación antes de enviar el formulario
+    uploadForm.addEventListener('submit', (e) => {
+        if (!fileInput.files.length) {
+            e.preventDefault();
+            alert("Por favor, sube un archivo antes de continuar.");
+        }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  <style>
+    main{
+        display: flex;
+        flex-direction: row;
+        font-size: 1.5vw;
+    }
+    .filtros{
+        margin: 0 4vw;
+    }
+    #filterForm{
+        width: 20vw;
+        height: fit-content;
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 1vw;
+    }
+    .custom-select select {
+        width: 100%;
+        font-size: 1.2vw;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        padding: 0.5vw;
+    }
+    
+    #jobResults div, #cursos-container div{
+        width: 60vw;
+        margin-bottom: 2vw;
+        padding: 2vw;
+        background-image: linear-gradient(white, #E5E5E5);
+        box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+    }
+
+    #cursos-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    #cursos-container div{
+        width: 80vw;
+    }
+
+    #jobResults span{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+   #cursos-container span{
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+        justify-content: space-between;
+    }
+
+    #jobResults p{
+        margin: 0.5vw;
+    }
+
+    #cursos-container h2, #cursos-container h3{
+        margin: 0;
+    }
+    .tiposEmpleos {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+    .tiposEmpleos button{
+        background-color:rgba(0, 0, 0, 0);
+        text-decoration: underline;
+    }
+
+  </style>
+  <title>Empleos y Cursos</title>
+</head>
+<body>
+    <header>
+        <a href="index.html"><div class="logo"><span class="Multi">Multi</span>Career</div></a>
+        <div class="nav-menu">
+          <span id="menu-toggle"> Buscar </span>
+          <span id="menu2-toggle"> Crear </span>
+        </div>
+        <div id="menu" class="menu">
+          <ul>
+              <li><a href="SubirCV.html">Empleos</a></li>
+              <li><a href="Cursos.html">Cursos y Certificaciones</a></li>
+          </ul>
+        </div>
+        <div id="menu2" class="menu2">
+          <ul>
+              <li><a href="HojaDeVida.html">Hoja de vida</a></li>
+              <li><a href="Portafolio.html">Portafolio</a></li>
+          </ul>
+        </div>
+    </header>
+
+    <div class="tiposEmpleos">
+        <button id="aplicasBtn"><h3>Ofertas a las que aplicas</h3></button>
+        <button id="aplicasBtn"><h3>Ofertas que podrían interesarte</h3></button>
+        <button id="mejorar-perfil-btn"><h3>Cómo mejorar tu perfil</h3></button>
+    </div>
+
+    <main>
+      <div id="filtros" class="filtros">
+        <h1>Filtrar Empleos</h1>
+        <form id="filterForm">
+            <label for="location">Ubicación:</label>
+            <div class="custom-select">
+            <select id="location" name="location">
+            <option value="">Todas</option>
+            <option value="Bogotá, DC">Bogotá, DC</option>
+            <option value="Medellín, Antioquia">Medellín, Antioquia</option>
+            <option value="Cali, Valle del Cauca">Cali, Valle del Cauca</option>
+            <option value="Ibagué, Tolima">Ibagué, Tolima</option>
+            </select>
+            </div>
+
+            <label for="type">Tipo de Contrato:</label>
+            <div class="custom-select">
+            <select id="type" name="type">
+            <option value="">Todos</option>
+            <option value="Contrato a término fijo">Término Fijo</option>
+            <option value="Contrato a término indefinido">Término Indefinido</option>
+            <option value="Contrato de Obra">Contrato de Obra</option>
+            <option value="Contrato de Aprendizaje">Contrato de Aprendizaje</option>
+            <option value="Prestación de Servicios">Prestación de Servicios</option>
+            </select>
+            </div>
+
+            <label for="modalidad">Modalidad:</label>
+            <div class="custom-select">
+            <select id="modalidad" name="modalidad">
+            <option value="">Todas</option>
+            <option value="Presencial">Presencial</option>
+            <option value="Remoto">Remoto</option>
+            <option value="Presencial y remoto">Híbrido</option>
+            </select>
+            </div>
+
+            <label for="categoria">Categoria:</label>
+            <div class="custom-select">
+            <select id="categoria" name="categoria">
+            <option value="">Todas</option>
+            <option value="web">Diseño web</option>
+            <option value="grafico">Diseño Gráfico</option>
+            <option value="contenido">Producción contenidos multimedia</option>
+            <option value="desarrollo">Desarrollo</option>
+            <option value="animacion">Animacion</option>
+            </select>
+            </div>
+        </form>
+      </div>
+
+      <div id="jobResults"></div>
+      <div id="cursos-container"></div>
+    </main>
+
+    <footer>
+      <p>Contáctanos</p>
+      <p>3005821103 | info@multicareer.com</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    const jobs = [
+        {
+        "title": "Diseñador Web",
+        "company": "CAFAM",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término fijo",
+        "description": "Si te apasiona el mundo del diseño ,Te invitamos a ser parte de la familia CAFAM, estamos en búsqueda de un desarrollador Web, Profesional en Diseño Gráfico, Diseño de Interacción, Psicología Cognitiva o un campo relacionado, con habilidades en UX y UI. Serás responsable de diseñar interfaces atractivas y funcionales que ofrezcan una experiencia de usuario excepcional..",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenador-web-en-bogota-dc-9C4EED80451361B961373E686DCF3405#lc=ListOffers-Score4-1"
+        , "categoria": "web"
+        },
+        {
+        "title": "Diseñador web",
+        "company": "Alkosto",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término indefinido",
+        "description": "Crear y desarrollar piezas gráficas y contenidos visuales enriquecidos para las páginas web de Alkosto y Ktronix, con el fin de mejorar la experiencia de usuario y potenciar la conversión de ventas.",
+        "modalidad": "Presencial y remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-disenador-web-bogota-en-bogota-dc-81D1A9205CD2C7CB61373E686DCF3405"
+        , "categoria": "web"
+        },
+        
+        {
+            "title": "Desarrollador Front End",
+            "company": "Grupo Alianza",
+            "location": "Bogotá, DC",
+            "type": "Contrato de Obra",
+            "description": "Importante empresa innovadora plataforma digital de evaluación de Talento Humano, esta en búsqueda de un(a) talentoso(a) Desarrollador Front End para unirse a nuestro equipo. Si te motiva trabajar en un entorno dinámico, en constante evolución y con un propósito significativo, ¡te invitamos a formar parte de nuestro equipo!",
+            "modalidad": "Presencial",
+            "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-front-end-en-bogota-dc-1A4E057C28D0AC8061373E686DCF3405"
+        , "categoria": "desarrollo"
+        },
+    
+        {
+            "title": "Desarrollador web",
+            "company": "Ocupar Temporales SA",
+            "location": "Cali, Valle del Cauca",
+            "type": "Contrato de Obra",
+            "description": "Importante empresa del sector tecnológico ubicada al norte de Cali, se encuentra en la búsqueda de Técnico, tecnólogo o profesional en áreas de sistemas, desarrollo de software o afines que cuente con 2 años de experiencia en en soporte técnico a servicios web y administración tecnológica.",
+            "modalidad": "Presencial y remoto",
+            "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-web-cali-en-cali-E37EBA688811124F61373E686DCF3405"
+            , "categoria": "web"
+        },
+        
+        {
+            "title": "Desarrollador Front End . Especialista en Operaciones de Marketing",
+            "company": "Global DigiOps SAS",
+            "location": "Ibagué, Tolima",
+            "type": "Contrato a término fijo",
+            "description": "El candidato ideal tiene experiencia comprobada en HTML5, CSS3, JavaScript y WordPress, así como un sólido conocimiento de la optimización front-end y mejores prácticas de SEO. Si esto te describe, nos encantaría conocerte.",
+            "modalidad": "Remoto",
+            "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-front-end-especialista-en-operaciones-de-marketing-remoto-todo-colombia-en-ibague-8192557C534AFB3461373E686DCF3405"
+        , "categoria": "desarrollo"
+        }
+    
+
+    ];
+
+    const jobsNo = [
+  {
+        "title": "Desarrollador Back end",
+        "company": "LilyPink & YOI",
+        "location": "Bogotá, DC",
+        "type": "Contrato de Obra",
+        "description": "LILI PINK y YOI Empresa líder en el mercado colombiano caracterizada por manejar marcas creativas, frescas, innovadoras y productos en tendencia y pronta moda, está en búsqueda de DESARROLLADOR BACK - END por proyecto de 2 MESES, profesional sistemas o áreas afines",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-back-end-norte-de-bogota-en-bogota-dc-44CED36EAFE6C35E61373E686DCF3405"
+        , "categoria": "desarrollo"
+    },
+    {
+        "title": "Desarrollador Fullstack bilingue",
+        "company": "Solvo SAS",
+        "location": "Bogotá, DC",
+        "type": "Contrato a término indefinido",
+        "description": "¡Únete a nuestro equipo y trabaja en proyectos innovadores desde la comodidad de tu hogar! Programador-a Desarrollador-a .NET Lunes a Viernes.",
+        "modalidad": "Remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-fullstack-bilingue-remoto-en-bogota-dc-B042100267FDB1F661373E686DCF3405"
+        , "categoria": "desarrollo"
+    },
+    {
+        "title": "Desarrollador (a) Chatbot",
+        "company": "KONECTA",
+        "location": "Medellín, Antioquia",
+        "type": "Contrato a término indefinido",
+        "description": "Haz parte de nuestro equipo y vive experiencias ¡únicas y memorables! Somos fans 1 de conectar. Tenemos el poder de la conexión, y cada día desafiamos los límites para seguir evolucionando. Estamos en busca de personas talentosas que también sientan el feeling por romper los esquemas y transformar vidas",
+        "modalidad": "Presencial y remoto",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-a-chatbot-en-medellin-29D42973336D641E61373E686DCF3405"
+    , "categoria": "desarrollo"
+    },
+    {
+        "title": "Desarrollador full stack (Java, react o Angular)",
+        "company": "Adecco Colombia SA",
+        "location": "Cali, Valle del Cauca",
+        "type": "Contrato a término indefinido",
+        "description": "Desarrollo de los requerimientos integrando el diseño de la experiencia del cliente (front end), Implementación de microservicios (Sspring,Java), Registro de Actividades en Jira y Bitbucket, Implementación Front_End-( React, JS,Angular; NextJs 11, Creación de consultas y entendimiento BD( Oracle, Postgres preferiblemente). Dar soporte a proyectos",
+        "modalidad": "Presencial",
+        "link": "https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-full-stack-java-react-o-angular-en-cali-6D9C12C852BC977D61373E686DCF3405"
+    , "categoria": "desarrollo"
+    },
+  ]
+ 
+  const cursos = [
+   {
+        "title": "Desarrollo móvil y JavaScript",
+        "company": "Meta",
+        "type": "Curso",
+        "duracion": "1 a 3 meses",
+        "idioma":"Español",
+        "link": "https://www.coursera.org/learn/mobile-development-and-javascript-es", 
+        "categoria": "desarrollo"
+    },
+    {
+        "title": "Frontend Development",
+        "company": "Scrimba",
+        "type": "Programa especializado",
+        "duracion": "1 mes",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/specializations/frontend"
+   , "categoria": "desarrollo"
+    },  {
+        "title": "SQL para el desarrollo web",
+        "company": "Universidad de Palermo",
+        "type": "Curso",
+        "duracion": "1 a 4 semanas",
+        "idioma":"Español",
+        "link": "https://www.coursera.org/learn/sql-para-desarrollo-web"
+        , "categoria": "desarrollo"
+   
+    }
+   ]
+   ;
+    document.addEventListener("DOMContentLoaded", () => {
+        const jobResults = document.getElementById("jobResults");
+        const filterForm = document.getElementById("filterForm");
+        const aplicasBtn = document.querySelectorAll(".tiposEmpleos button");
+        const filtros = document.getElementById("filtros");
+
+        const renderJobs = (jobList) => {
+            jobResults.innerHTML = ""; // Clear existing results
+            cursosContainer.innerHTML = "";
+            filtros.style.display = 'block';
+            jobList.forEach((job) => {
+            const jobDiv = document.createElement("div");
+            jobDiv.innerHTML = `
+            
+                <h2>${job.title}</h2>
+                <p><strong>Empresa:</strong> ${job.company}</p>
+                <span>
+                    <p><strong>Ubicación:</strong> ${job.location}</p>
+                    <p><strong>Tipo:</strong> ${job.type || "N/A"}</p>
+                    <p><strong>Modalidad:</strong> ${job.modalidad}</p>
+                </span>
+                <p>${job.description}</p>
+                <a href="${job.link}" target="_blank"><button>Ver más</button></a>
+                
+            `;
+            jobResults.appendChild(jobDiv);
+            });
+        };
+
+  const filterJobs = (jobList) => {
+    const filters = {
+      location: filterForm.location.value,
+      type: filterForm.type.value,
+      modalidad: filterForm.modalidad.value,
+      categoria: filterForm.categoria.value,
+    };
+
+    return jobList.filter((job) => {
+      return (
+        (!filters.location || job.location === filters.location) &&
+        (!filters.type || job.type === filters.type) &&
+        (!filters.modalidad || job.modalidad === filters.modalidad) &&
+        (!filters.categoria || job.categoria === filters.categoria)
+      );
+    });
+  };
+
+  // Event listener for filtering
+  filterForm.addEventListener("change", () => {
+    const filteredJobs = filterJobs(jobs);
+    renderJobs(filteredJobs);
+  });
+
+  // Event listeners for job categories
+  aplicasBtn[0].addEventListener("click", () => renderJobs(filterJobs(jobs)));
+  aplicasBtn[1].addEventListener("click", () => renderJobs(filterJobs(jobsNo)));
+
+  // Default rendering
+  renderJobs(jobs);
+});
+
+    const boton = document.getElementById('mejorar-perfil-btn');
+    const cursosContainer = document.getElementById('cursos-container');
+
+    // Evento al hacer clic en el botón
+    boton.addEventListener('click', () => {
+          jobResults.innerHTML = "";
+          cursosContainer.innerHTML = cursos.map(curso => `
+            <div>
+            <h2>${curso.title}
+            <h3> ${curso.company}</h3>
+            <span>
+                <p><strong>Tipo:</strong> ${curso.type}</p>
+                <p><strong>Idioma:</strong> ${curso.idioma}</p>
+                <p><strong>Duración:</strong> ${curso.duracion}</p>
+            </span>
+            <a href="${curso.link}" target="_blank"><button>Ver más</button></a>
+            </div>
+        `).join('');
+
+        // Ocultar los filtros cuando se muestran los cursos
+        const filtros = document.getElementById('filtros');
+        filtros.style.display = 'none';
+            
+    });
+
+    </script>
+</body>
+</html>

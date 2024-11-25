@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Hoja de Vida</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="index.html"><div class="logo"><span class="Multi">Multi</span>Career</div></a>
+        <div class="nav-menu">
+          <span id="menu-toggle"> Buscar </span>
+          <span id="menu2-toggle"> Crear </span>
+        </div>
+          
+        <div id="menu" class="menu">
+          <ul>
+              <li><a href="SubirCV.html">Empleos</a></li>
+              <li><a href="Cursos.html">Cursos y Certificaciones</a></li>
+          </ul>
+        </div>
+    
+        <div id="menu2" class="menu2">
+          <ul>
+              <li><a href="HojaDeVida.html">Hoja de vida</a></li>
+              <li><a href="Portafolio.html">Portafolio</a></li>
+          </ul>
+        </div>
+    </header>
+    <main>
+        <section class="CV">
+            <h1>Generador de Hoja de Vida</h1>
+            <div id="chat"></div>
+            <textarea id="userInput" placeholder="Escribe tu mensaje aquí..."></textarea>
+            <div class="botonesCV">
+                <button onclick="sendMessage()">Enviar</button>
+                <button onclick="generateResume()">Generar Hoja de Vida</button>
+            </div>
+            <div id="resumeOutput"></div>
+        </section>
+    </main>
+    <footer>
+        <p>Contáctanos</p>
+        <p>3005821103 | info@multicareer.com</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const conversationHistory = [
+            { role: 'system', content: '### Eres un asistente profesional que ayuda a crear hojas de vida personalizadas para estudiantes y egresados de Ingeniería en Multimedia. Tu tarea es recopilar toda la información relevante a través de una conversación con el usuario. Sigue estos pasos: --- ### **1. Inicio de la conversación** Saluda al usuario y explica brevemente el proceso: "Hola, estoy aquí para ayudarte a crear tu hoja de vida profesional. Te haré algunas preguntas clave sobre tu educación, experiencia, habilidades y proyectos. Una vez que tengamos todo, generaré un documento optimizado que destaque lo mejor de tu perfil. ¡Comencemos!" --- ### **2. Recolección de datos** [Preguntas para recopilar información básica, educación, experiencia, habilidades técnicas y blandas, certificaciones, idiomas, y enfoque profesional.] --- Cuando termines, solo agradece al usuario por proporcionar toda la información y no hagas un resumen de la información que te dio el usuario.' }
+        ];
+
+        let userData = [];
+
+        async function sendMessage() {
+            const chat = document.getElementById("chat");
+            const userInput = document.getElementById("userInput");
+            const userMessage = userInput.value;
+
+            if (!userMessage.trim()) return;
+
+            conversationHistory.push({ role: 'user', content: userMessage });
+            chat.innerHTML += `<div class="message user">${userMessage}</div>`;
+            userInput.value = "";
+            chat.scrollTop = chat.scrollHeight;
+
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer sk-exGrXpvsQqhJE9rPcIcWOtOZLUscnlJzVN8OF8G8DoT3BlbkFJ8mquB4YX9sF_sP83TcSwhhsofswjLy64T6kiNtkIMA` // Reemplaza con tu clave API
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4o-mini',
+                        messages: conversationHistory,
+                        max_tokens: 500,
+                        temperature: 0.7
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${data.error?.message || 'Ocurrió un error'}`);
+                }
+
+                const assistantMessage = data.choices[0].message.content;
+                conversationHistory.push({ role: 'assistant', content: assistantMessage });
+                chat.innerHTML += `<div class="message assistant">${assistantMessage}</div>`;
+
+                userData.push({ role: 'user', content: userMessage });
+                userData.push({ role: 'assistant', content: assistantMessage });
+
+                chat.scrollTop = chat.scrollHeight;
+            } catch (error) {
+                console.error(error);
+                chat.innerHTML += `<div class="message assistant">Error: No se pudo obtener una respuesta. Por favor, intenta nuevamente.</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }
+        }
+
+        async function generateResume() {
+            const resumeOutput = document.getElementById("resumeOutput");
+
+            const resumePrompt = [
+                { role: 'system', content: 'Genera una hoja de vida profesional en formato limpio y sin secciones vacías. Excluye cualquier marcador de posición.' },
+                ...userData,
+                { role: 'user', content: 'Genera la hoja de vida ahora utilizando toda la información proporcionada.' }
+            ];
+
+            try {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer sk-exGrXpvsQqhJE9rPcIcWOtOZLUscnlJzVN8OF8G8DoT3BlbkFJ8mquB4YX9sF_sP83TcSwhhsofswjLy64T6kiNtkIMA` // Reemplaza con tu clave API
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4o-mini',
+                        messages: resumePrompt,
+                        max_tokens: 1500,
+                        temperature: 0.7
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${data.error?.message || 'Ocurrió un error'}`);
+                }
+
+                const resumeMessage = data.choices[0].message.content;
+
+                const formattedResume = resumeMessage
+                    .replace(/(?:\*\*.*\*\*\n\n|## .*\n\n)/g, '') // Elimina secciones sin contenido
+                    .replace(/### (.*)/g, '<h3>$1</h3>')
+                    .replace(/## (.*)/g, '<h4 class="section-title">$1</h4>')
+                    .replace(/\*\*(.*?)\*\*/g, '<span class="subsection-title">$1</span>')
+                    .replace(/- (.*?)(\n|$)/g, '<div class="content">- $1</div>');
+
+                resumeOutput.innerHTML = `<h2>Hoja de Vida Generada</h2>${formattedResume}`;
+            } catch (error) {
+                console.error(error);
+                resumeOutput.innerHTML = `<div>Error: No se pudo generar la hoja de vida. Por favor, intenta nuevamente.</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  <style>
+    main{
+        display: flex;
+        flex-direction: row;
+        font-size: 1.5vw;
+    }
+    .filtros{
+        margin: 0 4vw;
+    }
+    #filterForm{
+        width: 20vw;
+        height: fit-content;
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 1vw;
+
+    }
+    .custom-select select {
+        width: 100%;
+        font-size: 1.2vw;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        padding: 0.5vw;
+    }
+    
+    #cursoResults div{
+        width: 60vw;
+        margin-bottom: 2vw;
+        padding: 2vw;
+        background-image: linear-gradient(white, #E5E5E5);
+        box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        
+    }
+
+    #cursoResults span{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        margin-top:0.5vw;
+    }
+
+    #cursoResults p{
+       margin: 0.5vw;
+    }
+
+    h2, h3{
+        margin:0;
+    }
+
+  </style>
+  <title>Cursos y certificaciones</title>
+</head>
+<body>
+    <header>
+        <a href="index.html"><div class="logo"><span class="Multi">Multi</span>Career</div></a>
+        <div class="nav-menu">
+          <span id="menu-toggle"> Buscar </span>
+          <span id="menu2-toggle"> Crear </span>
+        </div>
+          
+        <div id="menu" class="menu">
+          <ul>
+              <li><a href="SubirCV.html">Empleos</a></li>
+              <li><a href="Cursos.html">Cursos y Certificaciones</a></li>
+          </ul>
+        </div>
+    
+        <div id="menu2" class="menu2">
+          <ul>
+              <li><a href="HojaDeVida.html">Hoja de vida</a></li>
+              <li><a href="Portafolio.html">Portafolio</a></li>
+          </ul>
+        </div>
+      </header>
+    
+  <main>
+    <div class="filtros">
+    <h1>Filtrar cursos y certificaciones</h1>
+    <form id="filterForm">
+
+        <label for="categoria">Categoria:</label>
+        <div class="custom-select">
+        <select id="categoria" name="categoria">
+        <option value="">Todas</option>
+        <option value="desarrollo">Desarrollo</option>
+        <option value="3D">3D</option>
+        <option value="VR">Realidad Virtual</option>
+        <option value="videojuegos">Videojuegos</option>
+        </select>
+        </div>
+
+        <label for="type">Tipo:</label>
+        <div class="custom-select">
+        <select id="type" name="type">
+        <option value="">Todos</option>
+        <option value="Programa especializado">Programa de especialización</option>
+        <option value="Curso">Curso</option>
+        </select>
+        </div>
+
+        <label for="duracion">Duración:</label>
+        <div class="custom-select">
+        <select id="duracion" name="duracion">
+        <option value="">Todas</option>
+        <option value="1 a 4 semanas">1 a 4 semanas</option>
+        <option value="1 mes">1 mes</option>
+        <option value="2 meses">2 meses</option>
+        <option value="1 a 3 meses">1 a 3 meses</option>
+        <option value="3 a 6 meses">3 a 6 meses</option>
+        </select>
+        </div>
+
+        <label for="idioma">Idioma:</label>
+        <div class="custom-select">
+        <select id="idioma" name="idioma">
+        <option value="">Todos</option>
+        <option value="Inglés">Inglés</option>
+        <option value="Español">Español</option>
+        </select>
+        </div>
+
+       
+    </form>
+    </div>
+    <div id="cursoResults"></div>
+  </main>
+  <footer>
+    <p>Contáctanos</p>
+    <p>3005821103 | info@multicareer.com</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const cursos = [
+    {
+      "title": "Diseño de juegos: Arte y conceptos",
+      "company": "California Institute of the Arts",
+      "type": "Programa especializado",
+      "duracion": "1 mes",
+      "idioma":"Inglés",
+      "link": "https://www.coursera.org/specializations/game-design#outcomes"
+    , "categoria": "videojuegos"
+    },
+    {
+      "title": "Desarrollo de historias y narrativa para videojuegos.",
+      "company": "California Institute of the Arts",
+      "type": "Curso",
+      "duracion": "1 a 4 semanas",
+      "idioma":"Inglés",
+      "link": "https://www.coursera.org/learn/video-game-story?action=enroll"
+        , "categoria": "videojuegos"
+    },
+    {
+      "title": "Arte para juegos",
+      "company": "Michigan State University",
+      "type": "Programa especializado",
+      "duracion": "1 mes",
+      "idioma":"Inglés",
+      "link": "https://www.coursera.org/specializations/art-for-games"
+    , "categoria": "videojuegos"
+    },
+    {
+        "title": "Desarrollo móvil y JavaScript",
+        "company": "Meta",
+        "type": "Curso",
+        "duracion": "1 a 3 meses",
+        "idioma":"Español",
+        "link": "https://www.coursera.org/learn/mobile-development-and-javascript-es", 
+        "categoria": "desarrollo"
+    },
+    {
+        "title": "Frontend Development",
+        "company": "Scrimba",
+        "type": "Programa especializado",
+        "duracion": "1 mes",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/specializations/frontend"
+   , "categoria": "desarrollo"
+    },
+    {
+        "title": "Introducción al modelado 3D",
+        "company": "University of Michigan",
+        "type": "Curso",
+        "duracion": "1 a 4 semanas",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/learn/introduction-to-3d-modeling"
+    , "categoria": "3D"
+    },
+    {
+        "title": "SQL para el desarrollo web",
+        "company": "Universidad de Palermo",
+        "type": "Curso",
+        "duracion": "1 a 4 semanas",
+        "idioma":"Español",
+        "link": "https://www.coursera.org/learn/sql-para-desarrollo-web"
+        , "categoria": "desarrollo"
+   
+    },
+    {
+        "title": "Realidad virtual",
+        "company": "University of London",
+        "type": "Programa especializado",
+        "duracion": "3 a 6 meses",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/specializations/virtual-reality"
+        , "categoria": "VR"
+   
+    },
+    {
+        "title": "Modelos 3D para realidad virtual",
+        "company": "University of London",
+        "type": "Curso",
+        "duracion": "1 a 4 semanas",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/learn/3d-models-virtual-reality"
+        , "categoria": "3D"
+   
+    }
+    ,
+    {
+        "title": "Desarrollo de aplicaciones AR/VR/MR/XR con WebXR, Unity y Unreal",
+        "company": "University of Michigan",
+        "type": "Curso",
+        "duracion": "1 a 4 semanas",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/learn/develop-augmented-virtual-mixed-extended-reality-applications-webxr-unity-unreal"
+        , "categoria": "VR"
+   
+    },
+    {
+        "title": "Construcción de personajes 3D interactivos y RV social",
+        "company": "University of London",
+        "type": "Curso",
+        "duracion": "1 a 4 semanas",
+        "idioma":"Inglés",
+        "link": "https://www.coursera.org/learn/interactive-3d-characters-social-virtual-reality"
+        , "categoria": "VR", "categoria":"3D"
+   
+    }
+    ,
+    {
+        "title": "Desarrollo y Diseño de Videojuegos",
+        "company": "Universidad de los Andes",
+        "type": "Programa especializado",
+        "duracion": "2 meses",
+        "idioma":"Español",
+        "link": "https://www.coursera.org/specializations/desarrollo-videojuegos"
+        , "categoria": "videojuegos"
+   
+    }
+   
+
+  ]
+  ;
+
+    const filterForm = document.getElementById('filterForm');
+    const cursoResults = document.getElementById('cursoResults');
+
+    const filtercursos = () => {
+      const idioma = document.getElementById('idioma').value;
+      const type = document.getElementById('type').value;
+      const duracion = document.getElementById('duracion').value;
+      const categoria = document.getElementById('categoria').value;
+
+      const filteredcursos = cursos.filter(curso =>
+        (idioma === "" || curso.idioma === idioma) &&
+        (type === "" || curso.type === type) &&
+        (duracion === "" || curso.duracion === duracion)  &&
+        (categoria === "" || curso.categoria === categoria)
+      );
+
+      displaycursos(filteredcursos);
+    };
+
+    const displaycursos = (cursos) => {
+      cursoResults.innerHTML = cursos.map(curso => `
+        <div>
+          <h2>${curso.title}
+          <h3> ${curso.company}</h3>
+          <span>
+            <p><strong>Tipo:</strong> ${curso.type}</p>
+            <p><strong>Idioma:</strong> ${curso.idioma}</p>
+            <p><strong>Duración:</strong> ${curso.duracion}</p>
+         </span>
+          <a href="${curso.link}" target="_blank"><button>Ver más</button></a>
+        </div>
+      `).join('');
+    };
+
+    filterForm.addEventListener('change', filtercursos);
+
+    // Mostrar todos los trabajos al cargar la página
+    displaycursos(cursos);
+  </script>
+</body>
+</html>

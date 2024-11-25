@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  <style>
+    body {
+        font-family: "Inria Sans", serif;
+        font-size: 1.5vw;
+    }
+
+    #container {
+    top: 5vw;
+    left: 20vw;
+    width: 60vw;
+    height: 30vw;
+    position: relative;
+    perspective: 30vw;
+    }
+
+    #room {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-origin: 50% 80% 30vw;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    }
+    #room figure {
+    margin: 0;
+    display: block;
+    position: absolute;
+    border: 2px solid gray;
+    font: 200px"calibri";
+    text-align: center;
+    }
+    #room .n,.e,.s,.w {
+    width: 59.8vw;
+    height: 29.8vw;
+    
+    }
+    #room .n {
+    background-color: rgba(207, 207, 207, 0.3);
+    }
+    #room .e {
+    background-color: rgba(153, 153, 153, 0.3);
+    }
+    #room .s {
+    background-color: rgba(44, 44, 44, 0.3);
+    }
+    #room .w {
+    background-color: rgba(51, 51, 51, 0.3);
+    }
+    
+
+    #room .n {
+    transform: rotateY(0deg) translateZ(0px);
+    }
+    #room .e {
+    transform: rotateY(-90deg) translateZ(-30vw) translateX(30vw);
+    }
+    #room .s {
+    transform: rotateY(180deg) translateZ(-60vw);
+    }
+    #room .w {
+    transform: rotateY(90deg) translateZ(-30vw) translateX(-30vw);
+    }
+
+    #room .show-n {
+    transform: translateZ(0px) rotateY(0deg);
+    }
+    #room .show-e {
+    transform: translateX(-30vw) translateZ(30vw) rotateY(90deg);
+    }
+    #room .show-s {
+    transform: translateZ(60vw) rotateY(180deg);
+    }
+    #room .show-w {
+    transform: translateX(30vw) translateZ(30vw) rotateY(-90deg);
+    }
+  
+    .wall img, .wall video {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .controls {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        z-index: 100;
+        margin-top: 6vw;
+    }
+    
+
+    .Subir{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        margin-top: 2vw;
+     
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><div class="logo"><span class="Multi">Multi</span>Career</div></a>
+    <div class="nav-menu">
+      <span id="menu-toggle"> Buscar </span>
+      <span id="menu2-toggle"> Crear </span>
+    </div>
+      
+    <div id="menu" class="menu">
+      <ul>
+          <li><a href="SubirCV.html">Empleos</a></li>
+          <li><a href="Cursos.html">Cursos y Certificaciones</a></li>
+      </ul>
+    </div>
+
+    <div id="menu2" class="menu2">
+      <ul>
+          <li><a href="HojaDeVida.html">Hoja de vida</a></li>
+          <li><a href="Portafolio.html">Portafolio</a></li>
+      </ul>
+    </div>
+  </header>
+    <main>
+    <div class="Subir">
+        <label for="fileInput">Selecciona las fotos o vídeos que desees agregar a tu portafolio (Máx 4)</label>
+        <input type="file" id="fileInput" name="fileInput" multiple accept="image/*,video/*">
+    </div>
+    <section id="container">
+        <div id="room">
+          <figure class="wall n"> </figure>
+          <figure class="wall e"></figure>
+          <figure class="wall s"> </figure>
+          <figure class="wall w"></figure>
+        </div>
+      </section>
+    <div class="controls">
+        <button class="button" id="left">←</button>
+        <button class="button" id="right">→</button>
+    </div>
+    </main>
+    <footer>
+        <p>Contáctanos</p>
+        <p>3005821103 | info@multicareer.com</p>
+      </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const room = document.getElementById('room');
+    const fileInput = document.getElementById('fileInput');
+    const walls = document.querySelectorAll('.wall');
+    const container = document.getElementById('container');
+    let rotationY = 0;
+
+    // Rotate cube
+    document.getElementById('left').addEventListener('click', () => {
+      rotationY -= 90;
+      room.style.transform = 'rotateY(' + rotationY + 'deg)';
+    });
+
+    document.getElementById('right').addEventListener('click', () => {
+      rotationY += 90;
+      room.style.transform = 'rotateY(' + rotationY + 'deg)';
+    });
+
+    // Load files into walls
+    fileInput.addEventListener('change', (event) => {
+      const files = event.target.files;
+      [...files].forEach((file, index) => {
+        if (index >= walls.length) return;
+
+        const reader = new FileReader();
+        const wall = walls[index];
+
+        reader.onload = (e) => {
+          wall.innerHTML = '';
+          if (file.type.startsWith('image/')) {
+            wall.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`;
+          } else if (file.type.startsWith('video/')) {
+            wall.innerHTML = `<video src="${e.target.result}" controls></video>`;
+          }
+        };
+
+        reader.readAsDataURL(file);
+        
+      });
+    });
+  </script>
+</body>
+</html>
